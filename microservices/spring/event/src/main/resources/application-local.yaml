@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: event
+  datasource:
+    url: jdbc:postgresql://${host:localhost}:${port:5432}/${database}
+    username: ${dbuser:postgres}
+    password: ${dbpass:postgres}
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    validate-on-migrate: true

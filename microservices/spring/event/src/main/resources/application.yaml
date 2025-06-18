@@ -2,9 +2,18 @@ spring:
   application:
     name: event
   datasource:
-    url: jdbc:postgresql://172.240.0.2:5432/eventsdb
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://${host}:${port}/${database}
+    username: ${dbuser}
+    password: ${dbpass}
+    hikari:
+      connection-timeout: ${connection_timeout:30000}
+      idle-timeout: ${idle_timeout:600000}
+      max-lifetime: ${max_lifetime:1800000}
+      maximum-pool-size: ${maximum_pool_size:10}
+      minimum-idle: ${minimum_idle:5}
+      pool-name: ${pool_name:eventApiPool}
+      auto-commit: true
+      validation-timeout: ${validation_timeout:5000}
   jpa:
     show-sql: true
     hibernate:
@@ -12,7 +21,6 @@ spring:
     properties:
       hibernate:
         format_sql: true
+    open-in-view: false
   flyway:
-    repair-on-migrate: false
-    clean-on-validation-error: false
     validate-on-migrate: true

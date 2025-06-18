@@ -4,6 +4,8 @@ import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+import java.util.Objects;
+
 @Embeddable
 public class SubscriptionID {
 
@@ -28,5 +30,17 @@ public class SubscriptionID {
 
     public void setSession(Session session) {
         this.session = session;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        SubscriptionID that = (SubscriptionID) o;
+        return Objects.equals(user, that.user) && Objects.equals(session, that.session);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(user, session);
     }
 }
